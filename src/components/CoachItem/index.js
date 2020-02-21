@@ -10,14 +10,12 @@ class CoachItem extends Component {
     };
   }
 
-  componentDidUpdate (prevProps, prevState, snapshot) {
-    if (this.state.isSelected) {
-
-    }
-  }
-
   onClickHandler = () => {
-    this.setState({ isSelected: !this.state.isSelected });
+    this.setState({
+                    isSelected: !this.state.isSelected
+                  });
+    this.props.coach.isSelected = !this.props.coach.isSelected;
+    this.props.onSelectChange(this.props.coach);
   };
 
   render () {
@@ -26,17 +24,22 @@ class CoachItem extends Component {
 
     return (
       <div className={coachItemStyles.container}>
+
         <img src={profilePicture} alt={'coach'}
              className={coachItemStyles.coachPhoto}/>
+
         <div className={coachItemStyles.userInfo}>
           <div className={coachItemStyles.userInfoName}>{firstName + ' ' +
                                                          lastName}</div>
           <div className={coachItemStyles.userLevel}>{`Level ${index}`}</div>
         </div>
-        <div onClick={this.onClickHandler} className={this.state.isSelected
-                                                      ? coachItemStyles.isSelectedElement
-                                                      : coachItemStyles.selectElement}> ✓
+
+        <div onClick={this.onClickHandler}
+             className={this.state.isSelected
+                        ? coachItemStyles.isSelectedElement
+                        : coachItemStyles.selectElement}>
         </div>
+
       </div>
     );
   }

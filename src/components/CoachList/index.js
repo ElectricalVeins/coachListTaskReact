@@ -6,6 +6,7 @@ class CoachList extends Component {
   constructor (props) {
     super(props);
     this.state = {
+      selected: [],
       coaches: [],
       isFetching: false,
       error: null,
@@ -36,29 +37,40 @@ class CoachList extends Component {
     this.loadData();
   }
 
+  handleSelect = (coach) => {
+
+    let toArr=[{...this.state.selected, coach}];
+
+    this.setState({
+                    selected: toArr
+                  });
+  };
+
   renderCoaches = () => {
     const { coaches } = this.state;
+
     return coaches.map((item) => (
+
       <li key={item.id}
           className={coachListStyle.container}>
-        <CoachItem coach={item} level={item.id}/>
+        <CoachItem onSelectChange={this.handleSelect}
+                   coach={{ ...item, isSelected: false }}
+                   level={item.id}/>
       </li>
     ));
   };
 
   render () {
+    let { selected } = this.state;
 
-    return (
+    console.log(selected);
 
-      <ul>
-        {
-          this.renderCoaches()
-        }
-      </ul>
+    return (<>
+        <div>selected</div>
+        <ul>{this.renderCoaches()}</ul>
+      </>
     );
-
   }
-
 }
 
 export default CoachList;
