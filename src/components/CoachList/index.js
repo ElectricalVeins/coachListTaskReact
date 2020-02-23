@@ -15,7 +15,7 @@ class CoachList extends Component {
     }
 
     loadData = () => {
-        const limit = 5;
+        const limit = 20;
 
         this.setState({
             isFetching: true,

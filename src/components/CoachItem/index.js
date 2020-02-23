@@ -38,7 +38,7 @@ class CoachItem extends Component {
                 <div onClick={this.onClickHandler}
                      className={this.state.isSelected
                          ? coachItemStyles.isSelectedElement
-                         : coachItemStyles.selectElement}>
+                         : coachItemStyles.selectElement}>✔
                 </div>
 
             </div>
