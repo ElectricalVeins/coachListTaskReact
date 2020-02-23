@@ -1,6 +1,36 @@
-.container{
+.container {
+
     padding: 16px 12px;
     width: 375px;
     background-color: white;
     border-bottom: 1px solid lightgrey;
+}
+
+.toContainer {
+    min-height: 44px;
+    padding: 16px 12px;
+    width: 375px;
+    background-color: white;
+    border-bottom: 1px solid lightgrey;
+
+    display: flex;
+}
+
+.selectedCoachList{
+    display: flex;
+    margin-left: 8px;
+}
+
+.toPart{
+    color: #0B3157;
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.5;
+    width: 30px;
+    text-align: left;
+}
+
+.wrapper{
+    max-width: 375px;
+    margin: 0 auto;
 }

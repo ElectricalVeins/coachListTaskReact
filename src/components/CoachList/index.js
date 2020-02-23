@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import CoachItem from '../CoachItem';
 import coachListStyle from './list.module.css';
+import SelectedItems from "../selectedItems";
 
 class CoachList extends Component {
     constructor(props) {
@@ -37,7 +38,7 @@ class CoachList extends Component {
         this.loadData();
     }
 
-    handleSelect = (coach) => {
+    handleSelectCoachItem = (coach) => {
         const selectedArr = this.state.selected;
 
         if (selectedArr.includes(coach)) {
@@ -61,7 +62,7 @@ class CoachList extends Component {
 
             <li key={item.id}
                 className={coachListStyle.container}>
-                <CoachItem onSelectChange={this.handleSelect}
+                <CoachItem onSelectChange={this.handleSelectCoachItem}
                            coach={item}
                            level={item.id}/>
             </li>
@@ -71,12 +72,24 @@ class CoachList extends Component {
     render() {
         let {selected} = this.state;
 
-        console.log(selected);
 
-        return (<>
-                <div>selected</div>
+
+        return (<div className={coachListStyle.wrapper}>
+
+                <div className={ coachListStyle.toContainer}>
+
+                    <div className={coachListStyle.toPart}>
+                        <p>To:</p>
+                    </div>
+
+                    <div className={coachListStyle.selectedCoachList}>
+                        <SelectedItems coaches={selected}/>
+                    </div>
+
+                </div>
+
                 <ul>{this.renderCoaches()}</ul>
-            </>
+            </div>
         );
     }
 }
