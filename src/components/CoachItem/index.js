@@ -4,7 +4,7 @@ import ColorHash from 'color-hash';
 
 const colorHex = new ColorHash;
 
-class CoachItem extends Component {
+export default class CoachItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,11 +14,9 @@ class CoachItem extends Component {
     }
 
     onClickHandler = () => {
-
         this.setState({
             isSelected: !this.state.isSelected
         });
-
         this.props.onSelectChange(this.props.coach);
     };
 
@@ -27,18 +25,14 @@ class CoachItem extends Component {
     };
 
     errRender = () => {
-
         const {firstName, lastName} = this.props.coach;
-        const fullName = firstName + ' ' + lastName;
         const letters = firstName[0] + lastName[0];
-        const hex = colorHex.hex(fullName);
-
+        const hex = colorHex.hex(firstName + ' ' + lastName);
         return (<div
             style={{backgroundColor: hex}}
             className={coachItemStyles.imgError}>
             <p>{letters}</p>
         </div>)
-
     };
 
     imgRender = () => {
@@ -48,34 +42,26 @@ class CoachItem extends Component {
                  alt={'coach'}
                  className={coachItemStyles.coachPhoto}
                  onError={this.errHandler}/>
-        )
-    };
+        )};
 
     render() {
         const {firstName, lastName} = this.props.coach;
         const index = this.props.level;
-
         return (
             <div className={coachItemStyles.container}>
-
-                {this.state.error ? this.errRender() : this.imgRender()}
-
+                {this.state.error
+                    ? this.errRender()
+                    : this.imgRender()}
                 <div className={coachItemStyles.userInfo}>
                     <div className={coachItemStyles.userInfoName}>{firstName + ' ' +
                     lastName}</div>
                     <div className={coachItemStyles.userLevel}>{`Level ${index}`}</div>
                 </div>
-
                 <div onClick={this.onClickHandler}
                      className={this.state.isSelected
                          ? coachItemStyles.isSelectedElement
                          : coachItemStyles.selectElement}>✔
                 </div>
-
             </div>
         );
-    }
-
-}
-
-export default CoachItem;
+    }}

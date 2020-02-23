@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import CoachItem from '../CoachItem';
 import coachListStyle from './list.module.css';
-import SelectedItems from "../selectedItems";
+import SelectedItems from "../SelectedItems";
+import Spinner from "../Spinner";
 
 class CoachList extends Component {
     constructor(props) {
@@ -59,7 +60,6 @@ class CoachList extends Component {
         const {coaches} = this.state;
 
         return coaches.map((item) => (
-
             <li key={item.id}
                 className={coachListStyle.container}>
                 <CoachItem onSelectChange={this.handleSelectCoachItem}
@@ -88,7 +88,9 @@ class CoachList extends Component {
                 <div className={coachListStyle.toContainer}>
                     {this.renderSelectedCoaches()}</div>
 
-                <ul>{this.renderCoaches()}</ul>
+                <ul>{this.state.isFetching ?
+                    <Spinner/>
+                    : this.renderCoaches()}</ul>
             </div>
         );
     }
