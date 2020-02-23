@@ -22,7 +22,7 @@ class CoachList extends Component {
             isFetching: true,
         });
         fetch(
-            `http://localhost:3030/admin/users?limit=${limit}&offset=${this.state.coaches.length}`)
+            `http://192.168.0.109:3030/admin/users?limit=${limit}&offset=${this.state.coaches.length}`)
             .then(res => res.json())
             .then(data => {
                 this.setState({
