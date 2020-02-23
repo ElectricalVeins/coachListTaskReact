@@ -1,24 +1,15 @@
 import React, {Component} from 'react';
 
-export default class SelectedItems extends Component {
-    constructor(props) {
-        super(props);
-    }
+export default function SelectedItems(props) {
 
-    renderItems = (items) => {
+    let {coaches} = props;
 
-        return items.map((item) => (
-            <div key={item.id}>{item.firstName + ' ' + item.lastName}</div>
-        ))
-    };
+    return (
+        <p>
+            {coaches.map((item) => (
+                item.firstName + ' ' + item.lastName
+            ))}
+        </p>
+    )
 
-    render() {
-        let {coaches} = this.props;
-
-        return (
-            <>
-                {this.renderItems(coaches)}
-            </>
-        )
-    }
 }
