@@ -15,7 +15,7 @@ class CoachList extends Component {
     }
 
     loadData = () => {
-        const limit = 20;
+        const limit = 40;
 
         this.setState({
             isFetching: true,
@@ -69,24 +69,24 @@ class CoachList extends Component {
         ));
     };
 
-    render() {
+    renderSelectedCoaches = () => {
         let {selected} = this.state;
-
-
-
-        return (<div className={coachListStyle.wrapper}>
-
-                <div className={ coachListStyle.toContainer}>
-
-                    <div className={coachListStyle.toPart}>
-                        <p>To:</p>
-                    </div>
-
-                    <div className={coachListStyle.selectedCoachList}>
-                        <SelectedItems coaches={selected}/>
-                    </div>
-
+        return (<>
+                <div className={coachListStyle.toPart}>
+                    <p>To:</p>
                 </div>
+
+                <div className={coachListStyle.selectedCoachList}>
+                    <SelectedItems coaches={selected}/>
+                </div>
+            </>
+        )
+    };
+
+    render() {
+        return (<div className={coachListStyle.wrapper}>
+                <div className={coachListStyle.toContainer}>
+                    {this.renderSelectedCoaches()}</div>
 
                 <ul>{this.renderCoaches()}</ul>
             </div>

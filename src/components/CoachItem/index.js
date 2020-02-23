@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import coachItemStyles from './item.module.css';
+import ColorHash from 'color-hash';
+
+const colorHex = new ColorHash;
 
 class CoachItem extends Component {
     constructor(props) {
@@ -19,15 +22,43 @@ class CoachItem extends Component {
         this.props.onSelectChange(this.props.coach);
     };
 
+    errHandler = () => {
+        this.setState({error: true})
+    };
+
+    errRender = () => {
+
+        const {firstName, lastName} = this.props.coach;
+        const fullName = firstName + ' ' + lastName;
+        const letters = firstName[0] + lastName[0];
+        const hex = colorHex.hex(fullName);
+
+        return (<div
+            style={{backgroundColor: hex}}
+            className={coachItemStyles.imgError}>
+            <p>{letters}</p>
+        </div>)
+
+    };
+
+    imgRender = () => {
+        const {profilePicture} = this.props.coach;
+        return (
+            <img src={profilePicture || ' '}
+                 alt={'coach'}
+                 className={coachItemStyles.coachPhoto}
+                 onError={this.errHandler}/>
+        )
+    };
+
     render() {
-        const {profilePicture, firstName, lastName} = this.props.coach;
+        const {firstName, lastName} = this.props.coach;
         const index = this.props.level;
 
         return (
             <div className={coachItemStyles.container}>
 
-                <img src={profilePicture} alt={'coach'}
-                     className={coachItemStyles.coachPhoto}/>
+                {this.state.error ? this.errRender() : this.imgRender()}
 
                 <div className={coachItemStyles.userInfo}>
                     <div className={coachItemStyles.userInfoName}>{firstName + ' ' +
