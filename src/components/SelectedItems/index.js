@@ -15,7 +15,7 @@ export default class SelectedItems extends Component {
         ));
 
         if (renderList.length > 1) {
-            return renderList.join()
+            return renderList.join(', ')
         }
         return renderList
     };

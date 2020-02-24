@@ -8,15 +8,12 @@ export default class CoachItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSelected: false,
             error: null,
         };
     }
 
     onClickHandler = () => {
-        this.setState({
-            isSelected: !this.state.isSelected
-        });
+
         this.props.onSelectChange(this.props.coach);
     };
 
@@ -58,7 +55,7 @@ export default class CoachItem extends Component {
                     <div className={coachItemStyles.userLevel}>{`Level ${index}`}</div>
                 </div>
                 <div onClick={this.onClickHandler}
-                     className={this.state.isSelected
+                     className={this.props.isSelected
                          ? coachItemStyles.isSelectedElement
                          : coachItemStyles.selectElement}>✔
                 </div>
